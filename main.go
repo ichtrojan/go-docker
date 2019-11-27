@@ -8,18 +8,18 @@ import (
 )
 
 func main() {
-	r := mux.NewRouter()
+	route := mux.NewRouter()
 
-	r.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, "Hello World")
+	route.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		_, _ = fmt.Fprintf(w, "Hello World")
 	})
 
-	r.HandleFunc("/greet/{name}", func(w http.ResponseWriter, r *http.Request) {
+	route.HandleFunc("/greet/{name}", func(w http.ResponseWriter, r *http.Request) {
 		vars := mux.Vars(r)
 		name := vars["name"]
 
-		fmt.Fprintf(w, "Hello %s\n", name)
+		_, _ = fmt.Fprintf(w, "Hello %s\n", name)
 	})
 
-	http.ListenAndServe(":9990", r)
+	_ = http.ListenAndServe(":9990", route)
 }
